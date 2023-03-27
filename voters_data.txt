@@ -1,0 +1,9 @@
+[
+  {
+    "id": "40022024",
+    "name": "Oheneba Dade",
+    "email": "oheneba.dade@ashesi.edu.gh",
+    "year_group": "2024",
+    "major": "Computer Science"
+  }
+]

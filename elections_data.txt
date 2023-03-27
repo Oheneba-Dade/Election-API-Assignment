@@ -1,0 +1,26 @@
+[
+  {
+    "election_id": "1",
+    "name": "2023 Presidential Elections",
+    "start_date": "2023-10-18",
+    "end_date": "2023-10-23",
+    "candidates": [
+      {
+        "candidate_id": "1",
+        "name": "Kezia Asare",
+        "major": "Electrical Engineering",
+        "year_group": "2024",
+        "slogan": "All Hands on Deck",
+        "num_votes": 7
+      },
+      {
+        "candidate_id": "2",
+        "name": "Bernd Opoku-Boadu",
+        "major": "Computer Science",
+        "year_group": "2023",
+        "slogan": "Solid",
+        "num_votes": 5
+      }
+    ]
+  }
+]
