@@ -64,12 +64,15 @@ def update_voter(voter_id):
                 entry["year_group"] = record["year_group"]
                 entry["major"] = record["major"]
                 break
+        # if after the loop, the voter_id is not found, then create a new voter
         else:
             records.append(record)
-
+            with open(voters_file, "w") as f:
+                f.write(json.dumps(records, indent=2))
+                return jsonify(record), 201
         with open(voters_file, "w") as f:
             f.write(json.dumps(records, indent=2))
-        return jsonify(record), 201
+        return jsonify(record), 200
 
 
 # Delete A Voter
@@ -113,18 +116,19 @@ def create_election():
     else:
         records = json.loads(data)
         for entry in records:
-            if entry["id"] == record["id"]:
+            if entry["election_id"] == record["election_id"]:
                 return (
                     jsonify(
                         {
                             "error": {
                                 "code": "ELECTION_ALREADY_EXISTS",
-                                "message": f"An election with the id {record['id']} already exists.",
+                                "message": f"An election with the id {record['election_id']} already exists.",
                             }
                         }
                     ),
                     409,
                 )
+        records.append(record)
     with open(elections_file, "w") as f:
         f.write(json.dumps(records, indent=2))
     return jsonify(record)
@@ -138,7 +142,7 @@ def retrieve_election():
         data = f.read()
     records = json.loads(data)
     for record in records:
-        if record["id"] == election_id:
+        if record["election_id"] == election_id:
             return jsonify(record)
     return jsonify(election_404_message), 404
 
@@ -173,7 +177,7 @@ def cast_vote(election_id, candidate_id):
                     candidate["num_votes"] += 1
                     with open(elections_file, "w") as f:
                         f.write(json.dumps(records, indent=2))
-                    return jsonify(candidate)
+                    return jsonify(records)
             return jsonify(candidate_404_message), 404
     return jsonify(election_404_message), 404
 
